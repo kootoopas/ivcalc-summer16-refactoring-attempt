@@ -9,3 +9,4 @@ install browser-async globally
 npm install postcss autoprefixer globally
 
 asset pipeline heavily inspired by https://css-tricks.com/why-npm-scripts/
+TODO: ADD JSHINT AIRBNB LINTING
