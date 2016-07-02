@@ -1,14 +1,17 @@
 primary
 -------
 
-(empty)
+refactor utils
+
+Make objects out of group of co-rellated existing functions and global variables
+Make whole thing popular browser 2016 compliant
 
 secondary
 ---------
 
 reduce dropdown focus to one click (two required currently)
 maybe find a more accesible way to display end message? i.e have ranges of allowed stat values near input fields.
-Maybe rewrite the whole thing with react?
+wrap whole thing in closure
 
 add dist tasks: which allow embeddability (all source dumped into one html file like the original)
 `c += $('med0-0').value+','; ----> c = $('med0-0').value + ',' +`
