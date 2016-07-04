@@ -1,3 +1,5 @@
+var cookie = require('./lib/Cookie');
+
 /* Generic functions */
 function $() { // http://www.dustindiaz.com/top-ten-javascript/
 	var elements = [];
@@ -34,26 +36,7 @@ function event_del(obj,type,fn) { // http://www.dustindiaz.com
 		obj["e"+type+fn] = null;
 	}
 }
-function cookie_create(name,value,days) {
-	if (location.protocol == 'data:') { return null; } //prevents security errors
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = '; expires='+date.toGMTString();
-	}
-	else var expires = '';
-	document.cookie = name+'='+value+expires+'; path=/';
-}
-function cookie_read(name) {
-	if (location.protocol == 'data:') { return null; }
-	var name = name+'=', ca = document.cookie.split(';');
-	for(var i=0, j=ca.length;i < j;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-	}
-	return null;
-}
+
 function toggle(el) {
 	if ( el.style.display != 'none' ) { el.style.display = 'none'; }
 	else { el.style.display = ''; }
@@ -269,13 +252,13 @@ function online_check() { //Checks if there's an internet connection alive
 
 themes = ['isotope','spp','simplex']; //define your own themes here, feel free to edit this
 themed = themes.indexOf('none'); //global- set default theme here
-theme = (!cookie_read('theme')?themed:cookie_read('theme'));
+theme = (!cookie.get('theme')?themed:cookie.get('theme'));
 function toggle_theme() {
 	$('calculator').className = themes[theme];
 	display_status('The active theme has been changed to "'+themes[theme]+'".<br/><span class="btn" onclick="toggle_simple();">Simplify?</span>');
 	if (theme == -1 && (navigator.userAgent.indexOf('MSIE ') == -1)) {
 		display_status('The active theme has been changed to "Colorize".<br/>Select Hue, Saturation and Brightness:');
-		var c = cookie_read('color') || 'd';
+		var c = cookie.get('color') || 'd';
 		if (c.charAt(0) == ',') {
 			c = c.split(',');
 			thema(c[1],c[2],c[3]);
@@ -290,7 +273,7 @@ function toggle_theme() {
 		event_add($('sat'),"keyup", function (evt) {  vv(this.id,0,100,evt); thema($('hue').value,$('sat').value,$('lit').value); });
 		event_add($('lit'),"keyup", function (evt) {  vv(this.id,0,100,evt); thema($('hue').value,$('sat').value,$('lit').value); });
 	}
-	cookie_create('theme',theme,60);
+	cookie.set('theme',theme,60);
 	theme = (theme == themes.length?-1:theme*1+1);
 }
 function toggle_simple() {
@@ -305,7 +288,7 @@ function thema(h,s,l) { //Color theming, does not work in IE8
 	var bp = 'hsl('+h+', '+s+'%, '+(l-9)+'%)';
 	var bs = 'hsl('+h+', '+s+'%, '+(l-16)+'%)';
 	$('thema').innerHTML = '#calculator{background:'+bg+';border-color:'+bd+';}#calculator .primary{background:'+bp+';}#calculator .secondary{background:'+bs+';}#calculator input,#calculator select,#calculator .button{border-color:'+bd2+';color:'+bd2+';}#calculator .button {background-color:'+bg+';}'; //dibs on this method
-	cookie_create('color',','+h+','+s+','+l,60);
+	cookie.set('color',','+h+','+s+','+l,60);
 }
 eps = 1; //global- EPs enabled
 function toggle_evs() { //Enable/Disable EV functions
