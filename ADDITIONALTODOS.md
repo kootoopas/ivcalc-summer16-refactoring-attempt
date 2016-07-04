@@ -9,16 +9,16 @@ $(): cache id selected elements
 secondary
 ---------
 
-wrap whole js code in closure
+add scoped styles to improve embedding
 prefix ids and classes to avoid collision with other existing ones upon embedding
 reduce dropdown focus to one click (two required currently)
-maybe find a more accesible way to display end message? i.e have ranges of allowed stat values near input fields.
-Resolve ie8 issues (proly reserved words are being used as variable names)
+maybe find a more accessible way to display end message? i.e have ranges of allowed stat values near input fields.
+Resolve ie8 issues (probably reserved words are being used as variable names?)
 
 figure out how compression works
 move compressed and decompressed data to files
 
-add dist tasks: which allow embeddability (all source dumped into one html file like the original)
+add dist tasks: which allow embedding (all source dumped into one html file like the original)
 `c += $('med0-0').value+','; ----> c = $('med0-0').value + ',' +`
 
 
