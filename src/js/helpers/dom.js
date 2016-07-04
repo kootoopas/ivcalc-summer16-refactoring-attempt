@@ -1,33 +1,46 @@
+var IVCALC_CONTAINER_ID = require('../lib/constants').IVCALC_CONTAINER_ID;
+
 // TODO: Convert these helper functions to a class that caches accesed elements.
 var dom = module.exports = {};
 
 // http://www.dustindiaz.com/top-ten-javascript/
 dom.$ = function () {
-	var elements = [];
   var argumentsLength = arguments.length;
+  var elements;
+  var element;
   var i;
 
-	for (i = 0; i < argumentsLength; i++) {
-		var element = arguments[i];
+  if (argumentsLength === 1) {
+    element = arguments[0];
 
-		if (typeof element === 'string') {
-			element = document.getElementById(element);
+    if(typeof arguments[0] === 'string') {
+      element = document.getElementById(element);
     }
 
-		if (argumentsLength === 1) {
-      return element;
+    return element;
+  }
+  else {
+    elements = [];
+
+    for (i = 0; i < argumentsLength; i++) {
+      element = arguments[i];
+
+      if(typeof arguments[0] === 'string') {
+        element = document.getElementById(element);
+      }
+
+      elements.push(element);
     }
 
-		elements.push(element);
-	}
-	return elements;
+    return elements;
+  }
 };
 
 dom.$c = function (className, node) { //Get elements by class
   var a;
   var re;
   var els;
-  node = node || document.getElementsByTagName('body')[0];
+  node = node || document.getElementById(IVCALC_CONTAINER_ID);
 
   if(document.getElementsByClassName) {
     return node.getElementsByClassName();
