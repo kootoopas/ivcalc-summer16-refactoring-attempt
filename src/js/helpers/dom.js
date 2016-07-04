@@ -25,8 +25,9 @@ dom.$ = function () {
     for (i = 0; i < argumentsLength; i++) {
       element = arguments[i];
 
-      if(typeof arguments[0] === 'string') {
+      if(typeof arguments[i] === 'string') {
         element = document.getElementById(element);
+        console.log(element);
       }
 
       elements.push(element);
