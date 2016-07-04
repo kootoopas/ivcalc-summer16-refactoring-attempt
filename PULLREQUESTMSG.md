@@ -4,4 +4,6 @@ Css is now structured into modules written in scss[sass scss page url].
 
 Another necessary change is to make javascript and css code abide by best practices, which means:
 * Getting rid of global variables (browserify takes care of that for us).
-* 
+*
+
+All abbreviated javascript variable names have been made more descriptive; since uglify minifies variable names for us, there is no need for shortened names in source code. 😌
