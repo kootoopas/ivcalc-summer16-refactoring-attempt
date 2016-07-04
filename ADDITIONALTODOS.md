@@ -4,6 +4,7 @@ primary
 refactor utils
 Make objects out of group of co-related existing functions and global variables
 Make whole thing popular browser 2016 compliant
+$(): cache id selected elements
 
 secondary
 ---------
