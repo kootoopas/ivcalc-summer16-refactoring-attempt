@@ -1,4 +1,4 @@
-var cookie = require('./lib/Cookie');
+var cookie = require('./lib/cookie');
 
 /* Generic functions */
 function $() { // http://www.dustindiaz.com/top-ten-javascript/
@@ -21,20 +21,6 @@ function $c(classname, node) { //Get elements by class
 	for(var i=0, j=els.length; i<j; i++)
 		if(re.test(els[i].className))a.push(els[i]);
 	return a;
-}
-function event_add(obj,type,fn) { // http://www.dustindiaz.com
-	if (obj.addEventListener)	obj.addEventListener(type,fn,false );
-	else if (obj.attachEvent) {
-		obj["e"+type+fn] = fn;
-		obj.attachEvent( "on"+type, function() { obj["e"+type+fn](); } );
-	}
-}
-function event_del(obj,type,fn) { // http://www.dustindiaz.com
-	if (obj.removeEventListener) obj.removeEventListener(type,fn,false);
-	else if (obj.detachEvent) {
-		obj.detachEvent( "on"+type, obj["e"+type+fn] );
-		obj["e"+type+fn] = null;
-	}
 }
 
 function toggle(el) {

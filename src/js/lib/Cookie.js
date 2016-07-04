@@ -1,9 +1,9 @@
-var Cookie = module.exports = {};
+var cookie = module.exports = {};
 
 var _cookieCache = {};
 var _cached = false;
 
-Cookie.set = function (key, value, lifetimeInDays) {
+cookie.set = function (key, value, lifetimeInDays) {
   var expires;
 
   //prevents security errors
@@ -23,7 +23,7 @@ Cookie.set = function (key, value, lifetimeInDays) {
 
 // variation of the following SO top answer:
 // https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript
-Cookie.get = function (key) {
+cookie.get = function (key) {
   var cookies;
   var cookiesLength;
   var i;
