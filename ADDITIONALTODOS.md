@@ -8,13 +8,17 @@ Make whole thing popular browser 2016 compliant
 secondary
 ---------
 
-wrap whole thing in closure
+wrap whole js code in closure
 prefix ids and classes to avoid collision with other existing ones upon embedding
 reduce dropdown focus to one click (two required currently)
 maybe find a more accesible way to display end message? i.e have ranges of allowed stat values near input fields.
+Resolve ie8 issues (proly reserved words are being used as variable names)
 
 figure out how compression works
 move compressed and decompressed data to files
 
 add dist tasks: which allow embeddability (all source dumped into one html file like the original)
 `c += $('med0-0').value+','; ----> c = $('med0-0').value + ',' +`
+
+
+There is not need to check for/omit white space in a cookie, since no browser adds whitespace by itself. https://stackoverflow.com/questions/1969232/allowed-characters-in-cookies
