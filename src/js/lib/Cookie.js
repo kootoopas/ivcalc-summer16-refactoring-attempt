@@ -1,3 +1,4 @@
+// NOTE: Signleton implementation
 var cookie = module.exports = {};
 
 var _cookieCache = {};
@@ -22,7 +23,7 @@ cookie.set = function (key, value, lifetimeInDays) {
 };
 
 // variation of the following SO top answer:
-// https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript
+// https://stackoverflow.com/questions/5639346
 cookie.get = function (key) {
   var cookies;
   var cookiesLength;
