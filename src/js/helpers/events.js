@@ -3,7 +3,7 @@ var events = module.exports = {};
 // original functions source: http://www.dustindiaz.com
 events.add = function (obj, type, fn) {
 	if (obj.addEventListener) {
-    obj.addEventListener(type, fn, false );
+    obj.addEventListener(type, fn, false);
   }
 	else if (obj.attachEvent) {
 		obj['e' + type + fn] = fn;

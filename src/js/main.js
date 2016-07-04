@@ -1,12 +1,16 @@
 var cookie = require('./lib/cookie');
 var events = require('./helpers/events');
-var dom = require('./helpers/dom')
-/* Generic functions */
+var dom = require('./helpers/dom');
 
 function toggle(el) {
-	if ( el.style.display != 'none' ) { el.style.display = 'none'; }
-	else { el.style.display = ''; }
+	if (el.style.display !== 'none') {
+    el.style.display = 'none';
+  }
+	else {
+    el.style.display = '';
+  }
 }
+
 function autocomplete(field,select,property,forcematch) { // <input/> -> <select>
 	var f = false;
 	for (var i=0, j=select.options.length; i < j; i++) {
@@ -22,6 +26,7 @@ function autocomplete(field,select,property,forcematch) { // <input/> -> <select
 	if (f) { select.selectedIndex = i; }
 	else { select.selectedIndex = 0; }
 }
+
 function vv(e,min,max,evt,r)  {  //Field Value Validation (numeric only)
 	if (r != undefined && dom.$('act-'+r).checked == 0) { row_act(r); }
 	if (dom.$(e).title == '') {
@@ -53,7 +58,7 @@ function tooltips() { // inspired by http://qrayg.com/learn/code/qtip
 			dom.$('tooltip').style.top = (document.all?((de && de.scrollTop)?de.scrollTop:document.body.scrollTop)+window.event.clientY:evt.pageY)+'px';
 		});
 	}
-	var elements = dom.$c(('tooltip');
+	var elements = dom.$c('tooltip');
 	var  i=elements.length-1; do {
 		var e = elements[i];
 				if(e.title && !e.tooltip) {
@@ -266,7 +271,7 @@ function toggle_evs() { //Enable/Disable EV functions
 			eps = 1; dom.$('btn-evs').value = 'EVs: ON';
 		break;
 	}
-	var j = dom.$c(('eps').slice();
+	var j = dom.$c('eps').slice();
 	var i = j.length-1; do {
 		toggle(j[i]);
 	} while(i--);
@@ -377,7 +382,7 @@ function code_save() { //Displays a SaveCode
 	c += dom.$('med4-0').value+',';
 	c += dom.$('med5-0').value+',';
 	c += dom.$('statlvl').value+'';
-	var s = dom.$c(('statrow'), i = (mode==2?0:s.length), r = (mode==2 && act>-1?act:0); s.reverse();
+	var s = dom.$c('statrow'), i = (mode==2?0:s.length), r = (mode==2 && act>-1?act:0); s.reverse();
 	do {
 		c += '!'+dom.$('number-'+r).value+','+dom.$('level-'+r).value+','+dom.$('stat0-'+r).value+','+dom.$('stat1-'+r).value+','+dom.$('stat2-'+r).value+','+dom.$('stat3-'+r).value+','+dom.$('stat4-'+r).value+','+dom.$('stat5-'+r).value+','+dom.$('ep0-'+r).value+','+dom.$('ep1-'+r).value+','+dom.$('ep2-'+r).value+','+dom.$('ep3-'+r).value+','+dom.$('ep4-'+r).value+','+dom.$('ep5-'+r).value+','+dom.$('nat-'+r).value+','+dom.$('char-'+r).value+','+dom.$('hpt-'+r).value+','+dom.$('pot0-'+r).value+','+dom.$('pot1-'+r).value+','+dom.$('pot2-'+r).value;
 		if (i > 0) { r = s[i-1].id.split('-')[1]; }
