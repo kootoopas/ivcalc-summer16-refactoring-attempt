@@ -44,7 +44,7 @@ dom.$c = function (className, node) { //Get elements by class
   node = node || document.getElementById(IVCALC_CONTAINER_ID);
 
   if(document.getElementsByClassName) {
-    return node.getElementsByClassName();
+    return node.getElementsByClassName(className);
   }
 
 	a = [];
