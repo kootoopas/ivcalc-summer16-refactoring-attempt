@@ -1,7 +1,15 @@
-var IVCALC_CONTAINER_ID = require('../lib/constants').IVCALC_CONTAINER_ID;
-
-// TODO: Convert these helper functions to a class that caches accesed elements.
+// TODO: Convert these helper functions to a singleton class that caches accesed elements.
+// Other reasons to convert:
+// * setContainerId should set a private var called appContainerId to a user defined option.
+// Basically, config of ivcalc should be easy by any webmaster (winthin a closure,
+// maybe a script generation form would be the right way?):
+// ivcalc.init({
+//   appContainerId: 'legendarypokemon-calculator' // overwrite default app container id
+//   ...
+// });
 var dom = module.exports = {};
+
+dom.APP_CONTAINER_ID = 'calculator';
 
 // http://www.dustindiaz.com/top-ten-javascript/
 dom.$ = function () {
@@ -14,9 +22,11 @@ dom.$ = function () {
     element = arguments[0];
 
     if(typeof arguments[0] === 'string') {
+      // TODO: cache element
       element = document.getElementById(element);
     }
 
+    // TODO: cache element
     return element;
   }
   else {
@@ -33,6 +43,7 @@ dom.$ = function () {
       elements.push(element);
     }
 
+    // TODO: cache element
     return elements;
   }
 };
@@ -41,7 +52,8 @@ dom.$c = function (className, node) { //Get elements by class
   var a;
   var re;
   var els;
-  node = node || document.getElementById(IVCALC_CONTAINER_ID);
+
+  node = node || document.getElementById(dom.APP_CONTAINER_ID);
 
   if(document.getElementsByClassName) {
     return node.getElementsByClassName(className);
