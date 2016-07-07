@@ -13,7 +13,7 @@ events.add = function (obj, type, fn) {
 	}
 };
 
-// NOTE: This is function never used actually.
+// NOTE: This function is never used actually.
 events.delete = function (obj, type, fn) {
 	if (obj.removeEventListener) {
     obj.removeEventListener(type, fn, false);
