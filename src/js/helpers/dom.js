@@ -1,5 +1,6 @@
 var dom = module.exports = {};
 
+// TODO: make autocomplete a disctinct class module?
 function _autocompleteMatchSearch(inputElement, selectElement, optionsLength, forceMatch) {
   var i;
 
