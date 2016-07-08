@@ -29,6 +29,8 @@ function vv(e,min,max,evt,r)  {  //Field Value Validation (numeric only)
 			$(e).value = isNaN(v)?min:Math.min(v,max);
 	}
 }
+
+// TODO: Replace this with css3 tooltips
 function tooltips() { // inspired by http://qrayg.com/learn/code/qtip
 	if (!$('tooltip')) { var e = el_add($('calculator'),'div',{className:'a',id:'tooltip'});
 		events.add(document, "mousemove", function(evt) {
