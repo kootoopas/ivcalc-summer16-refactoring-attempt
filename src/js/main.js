@@ -1,34 +1,10 @@
 var cookie = require('./lib/cookie');
 var events = require('./helpers/events');
+var selectors = require('./helpers/selectors');
 var dom = require('./helpers/dom');
 
-var $ = dom.$;
-var $c = dom.$c;
-
-function toggle(el) {
-	if (el.style.display !== 'none') {
-    el.style.display = 'none';
-  }
-	else {
-    el.style.display = '';
-  }
-}
-
-function autocomplete(field,select,property,forcematch) { // <input/> -> <select>
-	var f = false;
-	for (var i=0, j=select.options.length; i < j; i++) {
-		if (select.options[i][property].toUpperCase().indexOf(field.value.toUpperCase()) == 0) {
-			f=true; break;
-		}
-	}
-	if (forcematch && !f) {
-		field.value = field.value.slice(0,field.value.length-1);
-		autocomplete(field,select,property,forcematch);
-		return false;
-	}
-	if (f) { select.selectedIndex = i; }
-	else { select.selectedIndex = 0; }
-}
+var $ = selectors.$;
+var $c = selectors.$c;
 
 function vv(e,min,max,evt,r)  {  //Field Value Validation (numeric only)
 	if (r != undefined && $('act-'+r).checked == 0) { row_act(r); }
@@ -252,9 +228,9 @@ function toggle_theme() {
 }
 function toggle_simple() {
 	$('calculator').className += ' simplex';
-	toggle($('info')); toggle($('instructions'));
+	dom.toggle($('info')); dom.toggle($('instructions'));
 	display_status('All is plain and neat now!<br/>(refresh page to restore defaults)');
-	}
+}
 function thema(h,s,l) { //Color theming, does not work in IE8
 	var bg = 'hsl('+h+', '+s+'%, '+l+'%)';
 	var bd = 'hsl('+h+', '+s+'%, '+(l-20)+'%)';
@@ -1067,14 +1043,14 @@ function initO() { //Actions to perform once the page has loaded
 	$('calculator').style.minHeight = (1*(window.innerHeight?window.innerHeight:(document.body?document.body.clientHeight:''))-16)+'px'; /* remove this when including */
 	$('ept').style.visibility = 'hidden';
 	$('mode1').style.display = 'none';
-	toggle($('history'));
+	dom.toggle($('history'));
 
-	events.add($('name'),"keyup", function () { autocomplete(this,$('species'),'text',true); $('number').value=Math.floor($('species').value); display_base(); row_edit(); });
+	events.add($('name'),"keyup", function () { dom.autocomplete(this,$('species'),true); $('number').value=Math.floor($('species').value); display_base(); row_edit(); });
 	events.add($('name'),"focus", function () { this.value = '' });
 	events.add($('species'),"change", function () { $('name').value=$('species').options[$('species').selectedIndex].text; $('number').value=Math.floor($('species').value); display_base(); row_edit(); });
 	events.add($('number'),"keyup", function (evt) { vv('number',0,forms_after,evt); $('species').value=$('number').value; $('name').value=$('species').options[$('species').selectedIndex].text; display_base(); row_edit(); });
 	events.add($('nat'),"change", function () { display_nature(); row_edit(); });
-	events.add($('charn'),"keyup", function () { autocomplete(this,$('char'),'text',true); display_char(); row_edit(); });
+	events.add($('charn'),"keyup", function () { dom.autocomplete(this,$('char'),true); display_char(); row_edit(); });
 	events.add($('char'),"change", function () { $('charn').value=$('char').options[$('char').selectedIndex].text; display_char(); row_edit(); });
 	events.add($('hpt'),"change", function () { row_edit(); if(act>-1){ $('level-'+act).focus(); }});
 	events.add($('hpt'),"blur", function () { if(act>-1){ $('level-'+act).focus();}}); //fails in chrome, issue 6759
@@ -1110,9 +1086,9 @@ function initO() { //Actions to perform once the page has loaded
 	events.add($('btn-statsmin'),"click", function () { display_stats((act>-1?act:0),0); });
 	events.add($('btn-statsmax'),"click", function () { display_stats((act>-1?act:0),1); });
 	events.add($('btn-hp'),"click", function () { calc_hidden((mode==2 && act>-1?act:0)); });
-	events.add($('toggleinfo'),"click", function () { toggle($('info')); toggle($('instructions')); });
-	events.add($('toggleinstructions'),"click", function () { toggle($('info')); toggle($('instructions')); });
-	events.add($('togglehistory'),"click", function () { toggle($('history')); });
+	events.add($('toggleinfo'),"click", function () { dom.toggle($('info')); dom.toggle($('instructions')); });
+	events.add($('toggleinstructions'),"click", function () { dom.toggle($('info')); dom.toggle($('instructions')); });
+	events.add($('togglehistory'),"click", function () { dom.toggle($('history')); });
 
 	var tload;
 	events.add($('btn-load'),"click", function(){

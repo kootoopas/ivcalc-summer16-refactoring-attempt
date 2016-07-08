@@ -1,74 +1,32 @@
-// TODO: Convert these helper functions to a singleton class that caches accesed elements.
-// Other reasons to convert:
-// * setContainerId should set a private var called appContainerId to a user defined option.
-// Basically, config of ivcalc should be easy by any webmaster (winthin a closure,
-// maybe a script generation form would be the right way?):
-// ivcalc.init({
-//   appContainerId: 'legendarypokemon-calculator' // overwrite default app container id
-//   ...
-// });
 var dom = module.exports = {};
 
-dom.APP_CONTAINER_ID = 'calculator';
-
-// http://www.dustindiaz.com/top-ten-javascript/
-dom.$ = function () {
-  var argumentsLength = arguments.length;
-  var elements;
-  var element;
+function _autocompleteMatchSearch(inputElement, selectElement, optionsLength, forceMatch) {
   var i;
 
-  if (argumentsLength === 1) {
-    element = arguments[0];
-
-    if(typeof arguments[0] === 'string') {
-      // TODO: cache element
-      element = document.getElementById(element);
+  for (i = 0; i < optionsLength; i++) {
+    if (selectElement.options[i].text.toUpperCase().indexOf(inputElement.value.toUpperCase()) === 0) {
+      return i;
     }
-
-    // TODO: cache element
-    return element;
   }
-  else {
-    elements = [];
 
-    for (i = 0; i < argumentsLength; i++) {
-      element = arguments[i];
+  if (forceMatch) {
+		inputElement.value = inputElement.value.slice(0, inputElement.value.length - 1);
+		_autocompleteMatchSearch(inputElement, selectElement, optionsLength, forceMatch);
+	}
 
-      if(typeof arguments[i] === 'string') {
-        element = document.getElementById(element);
-        console.log(element);
-      }
+  return 0;
+}
 
-      elements.push(element);
-    }
+dom.autocomplete = function (inputElement, selectElement, forceMatch) { // <input/> -> <select>
+  var matchingOptionIndex;
+  var optionsLength = selectElement.options.length;
 
-    // TODO: cache element
-    return elements;
-  }
+  matchingOptionIndex = _autocompleteMatchSearch(inputElement, selectElement, optionsLength, forceMatch);
+
+  selectElement.selectedIndex = matchingOptionIndex;
 };
 
-dom.$c = function (className, node) { //Get elements by class
-  var a;
-  var re;
-  var els;
 
-  node = node || document.getElementById(dom.APP_CONTAINER_ID);
-
-  if(document.getElementsByClassName) {
-    return node.getElementsByClassName(className);
-  }
-
-	a = [];
-	re = new RegExp('\\b' + className + '\\b');
-	els = node.getElementsByTagName('*');
-
-	for(var i=0, j=els.length; i<j; i++) {
-		if(re.test(els[i].className)) {
-      a.push(els[i]);
-    }
-  }
-	return a;
+dom.toggle = function (element) {
+    element.style.display = (element.style.display === '')? 'none' : '';
 };
-
-// get_text, $ and such functions go here
